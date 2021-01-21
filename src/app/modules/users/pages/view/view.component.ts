@@ -16,6 +16,10 @@ export class ViewComponent implements OnInit {
   user: User;
   userId: string;
   appIcon: File;
+  fileDetails: any = {
+    clientDoc: {},
+  };
+  openEditAppForm = false;
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -44,18 +48,26 @@ export class ViewComponent implements OnInit {
       });
   }
   onFileChanged(event) {
-    this.appIcon = event.target.files[0];
+    // this.appIcon = event.target.files[0];
+    this.fileDetails.clientMandateForm = event.srcElement.files[0];
   }
   addApp(appName: string): void {
-    const uploadData = new FormData();
-    uploadData.append('myFile', this.appIcon, this.appIcon.name);
-    console.log('form data', this.appIcon);
-
+    let formData: FormData = new FormData();
+    formData.append('clientDoc', this.fileDetails.clientDoc);
+    console.log('form data', formData);
     this.apiService
-      .addApp(this.userId, appName, uploadData)
+      .addApp(this.userId, appName, formData)
       .subscribe((addResponse: UserResponse) => {
         console.log('add users', addResponse);
         // this.user = addResponse.data;
       });
   }
+  // editApp(appId: string): void {
+  //   this.apiService
+  //     .addApp(this.userId, appName, formData)
+  //     .subscribe((addResponse: UserResponse) => {
+  //       console.log('add users', addResponse);
+  //       // this.user = addResponse.data;
+  //     });
+  // }
 }

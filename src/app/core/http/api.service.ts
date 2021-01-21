@@ -20,9 +20,16 @@ export class ApiService {
 
   addApp(userId: string, appName, appIcon): Observable<UserResponse> {
     console.log('appIcon ', appIcon);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':
+          'multipart/form-data; boundary=----WebKitFormBoundaryOrVhivHlll6zPi0p',
+      }),
+    };
     return this.http.post<UserResponse>(
       `${environment.baseURL}/user/${userId}/app`,
-      { app: appName, icons: appIcon }
+      { app: appName, icons: appIcon },
+      httpOptions
     );
   }
   deleteApp(userId: string, appId: string): Observable<UserResponse> {

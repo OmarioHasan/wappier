@@ -63,8 +63,8 @@
             </tr>
           </tbody>
         </table>
-        <form>
-          <div class="form-group">
+        <form *ngIf="!openEditAppForm">
+          <div class="">
             <label for="exampleInputEmail1">App Name</label>
             <input
               type="email"
@@ -75,7 +75,7 @@
               #appName
             />
           </div>
-          <div class="form-group">
+          <div class="">
             <input
               style="display: none"
               type="file"
