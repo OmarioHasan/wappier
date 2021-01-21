@@ -1,0 +1,59 @@
+<div class="component-container">
+  <h3 class="section-title">Users List</h3>
+  <table class="table table-hover table-dark mb-0">
+    <thead>
+      <tr>
+        <th scope="col">Avatar</th>
+        <th scope="col" class="pointer" (click)="sort('name')">
+          Name
+          <span
+            [class.activeSort]="
+              currentSortState.key === 'name' && currentSortState.asc
+            "
+            >↓</span
+          >
+        </th>
+        <th scope="col">Age</th>
+        <th scope="col" class="pointer" (click)="sort('country')">
+          Country
+          <span
+            [class.activeSort]="
+              currentSortState.key === 'country' && currentSortState.asc
+            "
+            >↓</span
+          >
+        </th>
+        <th scope="col" class="pointer" (click)="sort('apps')">
+          Number of apps
+          <span
+            [class.activeSort]="
+              currentSortState.key === 'apps' && currentSortState.asc
+            "
+            >↓</span
+          >
+        </th>
+      </tr>
+    </thead>
+    <tbody [@listAnimation]="users.length">
+      <tr
+        *ngFor="let user of users; trackBy: trackById"
+        [routerLink]="user._id"
+        class="pointer"
+      >
+        <td>
+          <div class="avatar">
+            <img class="img-fluid" src="assets/img/logo-thumb.png" alt="" />
+          </div>
+        </td>
+        <td>{{ user.name }}</td>
+        <td>{{ usersService.getAge(user.birthday) }}</td>
+        <td>{{ user.country }}</td>
+        <td>{{ user.appsCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-between mt-4 px-2">
+  <p>Show {{ users.length }} user</p>
+  <button class="btn btn-outline-dark" type="button">Add User</button>
+</div>

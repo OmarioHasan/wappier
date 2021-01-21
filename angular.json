@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "css"
         }
       },
       "root": "",
@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -91,7 +91,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "wappier"
+  "defaultProject": "wappier",
+  "cli": {
+    "analytics": "ff60ca6c-bf08-4f3b-bf5d-c608b452150b"
+  }
 }

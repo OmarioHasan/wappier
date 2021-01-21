@@ -1,0 +1,59 @@
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  display: inline-block;
+  line-height: 28px;
+}
+.actoins {
+  grid-gap: 0 10px;
+}
+.back {
+  background: #fff;
+  color: var(--gray-dark);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  text-align: center;
+  line-height: 27px;
+  margin-right: 10px;
+  font-size: 35px;
+}
+td button {
+  background-color: transparent;
+  border: 0;
+  display: inline-block;
+}
+
+td button img {
+  width: 25px;
+}
+ul {
+  padding: 0;
+  list-style: none;
+  color: #fff;
+  text-align: center;
+}
+ul li .avatar {
+  width: 80px;
+  height: 80px;
+  line-height: 70px;
+}
+ul li input {
+  text-align: center;
+  margin: 4px 0 7px;
+  width: 100%;
+}
+form {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  grid-gap: 0 15px;
+}

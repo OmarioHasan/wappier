@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+app-root {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+router-outlet {
+  display: none;
+}
+app-list,
+app-view {
+  width: 75%;
+  margin-right: 10px;
+}
+app-history {
+  width: calc(25% - 10px);
+  background: var(--gray-dark);
+}
+*:focus {
+  outline: none;
+}
+.component-container {
+  max-height: 700px;
+  min-height: 700px;
+  background: var(--gray-dark);
+  overflow-y: auto;
+}
+.component-container::-webkit-scrollbar {
+  width: 8px;
+  background: var(--gray);
+}
+.component-container::-webkit-scrollbar-thumb {
+  background: var(--gray-dark);
+}
+.section-title {
+  color: #fff;
+  margin-bottom: 0;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--cyan);
+}
+table {
+  text-align: center;
+}
+.pointer {
+  cursor: pointer;
+}

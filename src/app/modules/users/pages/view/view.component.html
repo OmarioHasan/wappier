@@ -1,0 +1,109 @@
+<div class="component-container">
+  <ng-container *ngIf="user">
+    <h3 class="section-title">
+      <span class="back pointer" routerLink="../">‹</span> {{ user.name }}
+    </h3>
+    <div class="container mx-0 row pt-5">
+      <div class="col-4">
+        <ul>
+          <li class="py-3">
+            <div class="avatar">
+              <img class="img-fluid" src="assets/img/logo-thumb.png" alt="" />
+            </div>
+          </li>
+          <li class="mb-3">
+            <button class="btn btn-outline-warning btn-sm">Edit Image</button>
+          </li>
+          <li>Name <input type="text" [value]="user.name" disabled /></li>
+          <li>Country <input type="text" [value]="user.country" disabled /></li>
+          <li>
+            Age
+            <input
+              type="text"
+              [value]="usersService.getAge(user.birthday)"
+              disabled
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="col-8">
+        <table class="table table-hover table-dark mb-0 table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">App Icon</th>
+              <th scope="col">App Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody [@listAnimation]="user.apps.length">
+            <tr *ngIf="user.apps.length < 10">
+              <td></td>
+              <td></td>
+              <td>
+                <button><img src="assets/svg/add.svg" alt="" /></button>
+              </td>
+            </tr>
+            <tr *ngFor="let app of user.apps; trackBy: trackById">
+              <td>
+                <div class="avatar">
+                  <img
+                    class="img-fluid"
+                    src="assets/img/logo-thumb.png"
+                    alt=""
+                  />
+                </div>
+              </td>
+              <td>{{ app.name }}</td>
+              <td>
+                <button><img src="assets/svg/edit.svg" alt="" /></button>
+                <button (click)="deleteApp(app._id)">
+                  <img src="assets/svg/delete.svg" alt="" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">App Name</label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              #appName
+            />
+          </div>
+          <div class="form-group">
+            <input
+              style="display: none"
+              type="file"
+              (change)="onFileChanged($event)"
+              #fileInput
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="fileInput.click()"
+            >
+              Select File
+            </button>
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addApp(appName.value)"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="d-flex justify-content-end mt-4 px-2 actoins">
+  <!-- <p>Show {{ users.length }} user</p> -->
+  <button class="btn btn-outline-dark" type="button">Remove User</button>
+  <button class="btn btn-outline-dark" type="button">Edit User</button>
+</div>
