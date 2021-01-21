@@ -32,6 +32,16 @@ export class ApiService {
       httpOptions
     );
   }
+  editApp(
+    userId: string,
+    appId: string,
+    appName: string
+  ): Observable<UserResponse> {
+    return this.http.put<UserResponse>(
+      `${environment.baseURL}/user/${userId}/app/${appId}`,
+      { app: appName }
+    );
+  }
   deleteApp(userId: string, appId: string): Observable<UserResponse> {
     return this.http.delete<UserResponse>(
       `${environment.baseURL}/user/${userId}/app/${appId}`

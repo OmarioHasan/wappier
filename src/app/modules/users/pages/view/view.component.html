@@ -55,7 +55,9 @@
               </td>
               <td>{{ app.name }}</td>
               <td>
-                <button><img src="assets/svg/edit.svg" alt="" /></button>
+                <button (click)="enableEditApp(app._id, app.name)">
+                  <img src="assets/svg/edit.svg" alt="" />
+                </button>
                 <button (click)="deleteApp(app._id)">
                   <img src="assets/svg/delete.svg" alt="" />
                 </button>
@@ -63,7 +65,7 @@
             </tr>
           </tbody>
         </table>
-        <form *ngIf="!openEditAppForm">
+        <form *ngIf="openEditAppForm">
           <div class="">
             <label for="exampleInputEmail1">App Name</label>
             <input
@@ -73,9 +75,10 @@
               aria-describedby="emailHelp"
               placeholder="Enter email"
               #appName
+              autofocus
             />
           </div>
-          <div class="">
+          <!-- <div class="">
             <input
               style="display: none"
               type="file"
@@ -89,12 +92,8 @@
             >
               Select File
             </button>
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="addApp(appName.value)"
-          >
+          </div> -->
+          <button type="button" class="btn btn-primary" (click)="editApp()">
             Submit
           </button>
         </form>

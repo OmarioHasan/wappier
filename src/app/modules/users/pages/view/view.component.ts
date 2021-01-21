@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@core/http/api.service';
@@ -20,6 +20,9 @@ export class ViewComponent implements OnInit {
     clientDoc: {},
   };
   openEditAppForm = false;
+  appId: string;
+  @ViewChild('appName') appName: ElementRef;
+
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -52,22 +55,31 @@ export class ViewComponent implements OnInit {
     this.fileDetails.clientMandateForm = event.srcElement.files[0];
   }
   addApp(appName: string): void {
-    let formData: FormData = new FormData();
-    formData.append('clientDoc', this.fileDetails.clientDoc);
-    console.log('form data', formData);
+    // let formData: FormData = new FormData();
+    // formData.append('clientDoc', this.fileDetails.clientDoc);
+    // console.log('form data', formData);
+    // this.apiService
+    //   .addApp(this.userId, appName, formData)
+    //   .subscribe((addResponse: UserResponse) => {
+    //     console.log('add users', addResponse);
+    //     // this.user = addResponse.data;
+    //   });
+  }
+  enableEditApp(appId: string, appName: string): void {
+    this.openEditAppForm = true;
+    setTimeout(() => {
+      this.appName.nativeElement.value = appName;
+      this.appName.nativeElement.focus();
+      this.appId = appId;
+    }, 1);
+  }
+  editApp(): void {
     this.apiService
-      .addApp(this.userId, appName, formData)
-      .subscribe((addResponse: UserResponse) => {
-        console.log('add users', addResponse);
-        // this.user = addResponse.data;
+      .editApp(this.userId, this.appId, this.appName.nativeElement.value)
+      .subscribe((editResponse: UserResponse) => {
+        console.log('add users', editResponse);
+        this.user = editResponse.data;
+        this.openEditAppForm = false;
       });
   }
-  // editApp(appId: string): void {
-  //   this.apiService
-  //     .addApp(this.userId, appName, formData)
-  //     .subscribe((addResponse: UserResponse) => {
-  //       console.log('add users', addResponse);
-  //       // this.user = addResponse.data;
-  //     });
-  // }
 }
