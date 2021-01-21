@@ -18,28 +18,22 @@ export class ApiService {
     return this.http.get<UserResponse>(`${environment.baseURL}/user/${id}`);
   }
 
-  addApp(userId: string, appName, appIcon): Observable<UserResponse> {
-    console.log('appIcon ', appIcon);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':
-          'multipart/form-data; boundary=----WebKitFormBoundaryOrVhivHlll6zPi0p',
-      }),
-    };
-    return this.http.post<UserResponse>(
-      `${environment.baseURL}/user/${userId}/app`,
-      { app: appName, icons: appIcon },
-      httpOptions
-    );
-  }
-  editApp(
+  editUser(
     userId: string,
-    appId: string,
-    appName: string
+    userData: { name: string; country: string; birthday: number }
   ): Observable<UserResponse> {
     return this.http.put<UserResponse>(
-      `${environment.baseURL}/user/${userId}/app/${appId}`,
-      { app: appName }
+      `${environment.baseURL}/user/${userId}`,
+      {
+        name: userData.name,
+        country: userData.country,
+        birthday: +userData.birthday,
+      }
+    );
+  }
+  deleteUser(userId: string): Observable<UserResponse> {
+    return this.http.delete<UserResponse>(
+      `${environment.baseURL}/user/${userId}`
     );
   }
   deleteApp(userId: string, appId: string): Observable<UserResponse> {

@@ -1,0 +1,18 @@
+ul {
+  padding: 0;
+  margin: 10px;
+  list-style: none;
+}
+li {
+  background: #fff;
+  padding: 30px 7px;
+  line-height: 1.5;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+li span {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+}

@@ -1,4 +1,10 @@
 <div>
   <h3 class="section-title">History</h3>
-  <div class="component-container"></div>
+  <div class="component-container">
+    <ul [@listAnimation]="changes.length">
+      <li *ngFor="let log of changes">
+        {{ log.change }} <span>{{ log.time }}</span>
+      </li>
+    </ul>
+  </div>
 </div>

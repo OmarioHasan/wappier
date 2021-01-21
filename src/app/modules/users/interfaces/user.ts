@@ -2,7 +2,7 @@ export interface User {
   _id: string;
   avatar: string;
   name: string;
-  birthday: string;
+  birthday: Date;
   country: string;
   apps: App[];
   appsCount: number;

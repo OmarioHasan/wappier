@@ -5,7 +5,7 @@
     </h3>
     <div class="container mx-0 row pt-5">
       <div class="col-4">
-        <ul>
+        <ul [formGroup]="userForm">
           <li class="py-3">
             <div class="avatar">
               <img class="img-fluid" src="assets/img/logo-thumb.png" alt="" />
@@ -14,15 +14,17 @@
           <li class="mb-3">
             <button class="btn btn-outline-warning btn-sm">Edit Image</button>
           </li>
-          <li>Name <input type="text" [value]="user.name" disabled /></li>
-          <li>Country <input type="text" [value]="user.country" disabled /></li>
+          <li>
+            Name
+            <input type="text" formControlName="name" />
+          </li>
+          <li>
+            Country
+            <input type="text" formControlName="country" />
+          </li>
           <li>
             Age
-            <input
-              type="text"
-              [value]="usersService.getAge(user.birthday)"
-              disabled
-            />
+            <input type="text" formControlName="birthday" />
           </li>
         </ul>
       </div>
@@ -40,7 +42,9 @@
               <td></td>
               <td></td>
               <td>
-                <button><img src="assets/svg/add.svg" alt="" /></button>
+                <button (click)="openAppForm = true; editMode = false">
+                  <img src="assets/svg/add.svg" alt="" />
+                </button>
               </td>
             </tr>
             <tr *ngFor="let app of user.apps; trackBy: trackById">
@@ -65,36 +69,33 @@
             </tr>
           </tbody>
         </table>
-        <form *ngIf="openEditAppForm">
+        <form *ngIf="openAppForm">
           <div class="">
-            <label for="exampleInputEmail1">App Name</label>
             <input
               type="email"
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter email"
+              placeholder="Enter app name"
               #appName
               autofocus
+              (change)="DEFAULT_DROPZONE_CONFIG.params = { app: appName.value }"
             />
           </div>
-          <!-- <div class="">
-            <input
-              style="display: none"
-              type="file"
-              (change)="onFileChanged($event)"
-              #fileInput
-            />
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="fileInput.click()"
-            >
-              Select File
-            </button>
-          </div> -->
-          <button type="button" class="btn btn-primary" (click)="editApp()">
-            Submit
+
+          <dropzone
+            [config]="DEFAULT_DROPZONE_CONFIG"
+            [message]="'click to upload'"
+            #drpzone="ngxDropzone"
+            (success)="editMode ? editSuccess() : addSuccess()"
+          ></dropzone>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="editMode ? editApp() : addApp()"
+          >
+            {{ editMode ? "Edit" : "Add" }}
           </button>
         </form>
       </div>
@@ -102,7 +103,14 @@
   </ng-container>
 </div>
 <div class="d-flex justify-content-end mt-4 px-2 actoins">
-  <!-- <p>Show {{ users.length }} user</p> -->
-  <button class="btn btn-outline-dark" type="button">Remove User</button>
-  <button class="btn btn-outline-dark" type="button">Edit User</button>
+  <button (click)="deleteUser()" class="btn btn-outline-dark" type="button">
+    Remove User
+  </button>
+  <button
+    class="btn btn-outline-dark"
+    type="button"
+    (click)="!editUser ? startEditUser() : editUserData()"
+  >
+    {{ editUser ? "Save Edits" : "Edit User" }}
+  </button>
 </div>
